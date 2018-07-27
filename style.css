@@ -1,0 +1,32 @@
+#player_deck{
+}
+#player_deck ul{
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+    max-width:  700px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.card{
+    margin:5px;
+    border:1px solid yellow;
+    border-radius:5px;
+    background: green;
+    padding:10px;
+    width: 70px;
+    height: 100px;
+}
+
+.card.regular{
+
+}
+
+.card.special{
+    background-color: orange;
+}
+
+.card.joker{
+    background-color: orangered;
+}
