@@ -7,10 +7,24 @@ class Specials extends Card{
         this.setColor(color);
         this.setName();
 
-        this.type="special";
+        this.setType("special");
     }
 
-    setName(){
-        this.name = "Special : " + this.bonus +' '+ this.getColor()
+    getBonus() {
+        return this.bonus
+    };
+
+    getTagContent() {
+        switch (this.bonus) {
+            case '+2':
+                return '<span>+</span>2';
+                break;
+            case 'invert':
+                return '<i class="fas fa-arrows-alt-h"></i>';
+                break;
+            case 'pass':
+                return '<i class="fas fa-ban"></i>';
+                break;
+        }
     }
 }

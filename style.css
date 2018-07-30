@@ -1,32 +1,106 @@
+body {
+    background-color: green;
+    padding: 20px;
+    font-family: "Comic Sans MS", cursive;
+}
+
 #player_deck{
+}
+
+ul {
+    list-style-type: none;
+    margin: 0 auto;
 }
 #player_deck ul{
     display: flex;
     justify-content: flex-start;
-    list-style-type: none;
     max-width:  700px;
     flex-wrap: wrap;
-    margin: 0 auto;
 }
 
+#player_deck .card:hover {
+    margin: -25px 25px;
+}
+
+
+
 .card{
-    margin:5px;
-    border:1px solid yellow;
+    transition: margin 200ms;
+    margin: 5px -20px;
     border-radius:5px;
     background: green;
-    padding:10px;
-    width: 70px;
-    height: 100px;
+    width: 100px;
+    height: 140px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.3rem;
+    box-shadow: 4px 5px 5px rgba(1, 1, 1, .2);
+    border: 8px solid white;
+    cursor: pointer;
 }
+
 
 .card.regular{
 
 }
 
 .card.special{
-    background-color: orange;
+    padding: 8px;
 }
 
 .card.joker{
-    background-color: orangered;
+    background-color: black;
+    border: 5px solid white;
+    color: white;
+}
+
+.jaune {
+    background-color: yellow;
+}
+
+.bleu {
+    background-color: blue;
+}
+
+.rouge {
+    background-color: red;
+}
+
+.vert {
+    background-color: #55d231;
+}
+
+.card span, .card.special {
+    font-size: 6rem;
+    line-height: 7rem;
+}
+
+.card.special span {
+    position: absolute;
+    color: #000000a3;
+    margin-left: -14px;
+    margin-top: -8px;
+    font-size: 5rem;
+}
+
+#discard, #pile {
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+}
+
+#discard .card {
+    position: absolute;
+}
+
+i.fa, i.fas {
+    font-size: 4.3rem;
+    margin-top: 20px;
+    display: block;
+}
+
+.card.backward {
+    border: 0;
+    background: url("https://www.tradingcarddb.com/Images/Cards/Racing/80717/80717-5719744Bk.jpg") no-repeat;
+    background-size: 100% 100%;
 }

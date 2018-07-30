@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>UNO</title>
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <script src="datas.js"></script>
@@ -19,8 +20,14 @@
 </head>
 <body>
     <h1>Le jeu du UNO</h1>
+    <nav>
+        <button id="sortCards">Sort Cards</button>
+    </nav>
     <main>
-        <div id="stack"></div>;
+        <ul id="discard"></ul>
+        <div id="pile">
+            <div class="card backward" data-pile="true"></div>
+        </div>
         <div id="player_deck"></div>
     </main>
 

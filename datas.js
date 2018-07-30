@@ -1,5 +1,4 @@
-
-let colors = ['rouge', 'bleu', 'vert', 'jaune'];
+let colors = ['rouge', 'bleu', 'vert', 'jaune', 'black'];
 
 let name_samples = [
     'Adam',

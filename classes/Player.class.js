@@ -4,7 +4,7 @@ class Player{
     constructor(id){
         this.id = id;
         this.name = this.getRandomName();
-        this.deck=[];
+        this.deck = [];
     }
 
     getRandomName(){
@@ -15,8 +15,21 @@ class Player{
         this.deck = deck;
     }
 
+    removeCardFromDeck(cardToRemove) {
+        $(this.deck).each(function (index, card) {
+            if (card.id === cardToRemove.id) {
+                this.deck.splice(index, 1);
+            }
+        }.bind(this));
+        //console.log((this.deck)) ;
+    }
+
     getDeck(){
         return this.deck;
+    }
+
+    addCard(card) {
+        this.deck.push(card);
     }
 }
 

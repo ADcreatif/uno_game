@@ -1,6 +1,8 @@
 "use strict";
+let game;
+
 
 $(function(){
-    let game = new Game();
+    game = new Game();
     game.start();
 });

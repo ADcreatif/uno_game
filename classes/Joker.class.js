@@ -2,15 +2,12 @@
 
 
 class Joker extends Card{
-    constructor(id, bonus){
+    constructor(id, color, bonus) {
         super(id);
         this.bonus = bonus;
+        this.setColor(color);
         this.setName();
-
-        this.type="joker";
+        this.setType("joker");
     }
 
-    setName(){
-        this.name = this.bonus;
-    }
 }

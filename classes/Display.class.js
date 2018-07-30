@@ -4,22 +4,39 @@
 class Display {
 
 
-    static showCards(deck){
+    /**
+     * affiche le deck du joueur en cours
+     * @param deck {Array} of Cards
+     */
+    static updatePlayerDeck(deck) {
         let ul = $('<ul>');
 
         for(let index in deck){
             if(deck.hasOwnProperty(index)){
-                ul.append(
-                    $('<li>').text(deck[index].getName()).addClass('card '+ deck[index].type)
-                );
+                ul.append(Display.getCardHTML(deck[index]));
             }
         }
-        $('#player_deck').append(ul);
+        $('#player_deck').empty().append(ul);
     }
 
-    static  showCurrentCard(card){
-        $('#stack').append(
-            $('<li>').text(card.getName()).addClass('card '+ card.type)
-        )
+    /**
+     * affiche la dernière carte de la défausse
+     * @param card {Card}
+     */
+    static updateCurrentCard(card) {
+        $('#discard').append(Display.getCardHTML(card));
+    }
+
+    /**
+     * Génération du code html d'une carte
+     * @param card
+     * @returns {*|jQuery}
+     */
+    static getCardHTML(card) {
+
+        return $('<li>')
+            .html(card.getTagContent() || card.getName())
+            .addClass(card.getClass())
+            .data('id', card.id)
     }
 }

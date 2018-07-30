@@ -6,11 +6,12 @@ class RegularCard extends Card{
         this.value = value;
         this.setColor(color);
         this.setName();
-
-        this.type="regular";
+        this.setType("regular");
     }
 
     setName(){
-        this.name = "Regular : " + this.value +' '+ this.getColor()
+        this.name = "<span>" + this.value + '</span>';
     }
+
+
 }
