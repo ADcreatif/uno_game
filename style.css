@@ -22,8 +22,9 @@ ul {
     margin: -25px 25px;
 }
 
-
-
+/**********************************************
+                     CARDS
+ ***********************************************/
 .card{
     transition: margin 200ms;
     margin: 5px -20px;
@@ -39,17 +40,14 @@ ul {
     cursor: pointer;
 }
 
-
-.card.regular{
-
+.card.regular {
 }
 
-.card.special{
+.card.special {
     padding: 8px;
 }
 
 .card.joker{
-    background-color: black;
     border: 5px solid white;
     color: white;
 }
@@ -68,6 +66,10 @@ ul {
 
 .vert {
     background-color: #55d231;
+}
+
+.black {
+    background-color: black;
 }
 
 .card span, .card.special {
@@ -103,4 +105,76 @@ i.fa, i.fas {
     border: 0;
     background: url("https://www.tradingcarddb.com/Images/Cards/Racing/80717/80717-5719744Bk.jpg") no-repeat;
     background-size: 100% 100%;
+}
+
+/**********************************************
+                        UI
+ ***********************************************/
+.hidden {
+    display: none;
+}
+
+#message {
+    color: white;
+    background-color: rgba(0, 0, 0, .3);
+    padding: 10px;
+    border-radius: 40px;
+    border: 2px solid rgba(255, 255, 255, .6);
+}
+
+#modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .9);
+}
+
+#modal .container {
+    width: 600px;
+    height: 60%;
+    background-color: white;
+    margin: 100px auto 20px;
+}
+
+#modal * {
+    box-sizing: border-box;
+}
+
+#modal .legend {
+    position: relative;
+    color: white;
+    background-color: rgba(255, 255, 255, .1);
+    padding: 20px;
+    border-radius: 40px;
+    border: 2px solid rgba(255, 255, 255, .6);
+    width: 600px;
+    margin: 0 auto;
+}
+
+#modal.color_choice .container {
+    left: calc(50% - 150px);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 20px solid white;
+    overflow: hidden;
+}
+
+.color_choice table {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.color_choice table:hover td {
+    transition: opacity 600ms;
+    opacity: .4
+}
+
+.color_choice table td:hover {
+    opacity: 1;
 }

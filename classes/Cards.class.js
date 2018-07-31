@@ -36,6 +36,13 @@ class Card {
         this.color = color;
     }
 
+    triggerAction() {
+    }
+
+    /**
+     *
+     * @returns {int} the color id value
+     */
     getColor() {
         return colors[this.color];
     }

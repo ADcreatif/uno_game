@@ -93,69 +93,85 @@ class CardManager {
         Object.assign(this.pile, this.cards);
     }
 
+    canPlayDeck(deck, targetCard) {
+        // on boucle sur toutes les cartes du deck du joueur
+        for (let card_index in deck) {
+            if (deck.hasOwnProperty(card_index)) {
+
+                // on vérifie s'il y a une carte jouable
+                if (this.canPlayCard(deck[card_index], targetCard)) {
+                    // dans ce cas, mission accomplie, le joueur peut jouer
+                    return true;
+                }
+            }
+        }
+        // si à aucun moment on a trouvé une carte jouable, alors on return false
+        return false;
+    }
+
     /**
      * Vérification des conditions pour poser une carte
      * @param card
      * @param targetCard
      */
-    canPlay(card, targetCard) {
+    canPlayCard(card, targetCard) {
 
         // if(card.getType() === "joker" || (targetCard.getType() === "special" && ((card.getType() === "special" && card.getBonus() === targetCard.getBonus()) || card.getColor() === targetCard.getColor())) || (targetCard.getType() === "regular" && (card.getColor() === targetCard.getColor() || card.getValue() === targetCard.getValue())))
         //   return;
 
         if (card.getType() === "joker")
-            return;
+            return true;
 
         switch (targetCard.getType()) {
             case "special":
                 if (card.getType() === "special" && card.getBonus() === targetCard.getBonus())
-                    return;
+                    return true;
                 if (card.getColor() === targetCard.getColor())
-                    return;
+                    return true;
                 break;
 
             case "regular":
                 if (card.getColor() === targetCard.getColor())
-                    return;
+                    return true;
                 if (card.getValue() === targetCard.getValue())
-                    return;
+                    return true;
                 break;
 
-            /*case "joker":
-             return;
-             break;*/
+            case "joker":
+                if (card.getColor() === targetCard.getColor())
+                    return true;
+                break;
         }
 
-        throw "vous ne pouvez pas jouer cette carte";
+        return false;
     }
 
-    static sortCards(deck) {
-        let mapped, sorted;
+    static  sortCards(deck) {
+        let sorted = [];
 
-        // création d'un mapping, c'est un tableau qui servira de filtre pour la réorganisation
-        mapped = deck.map(function (card, index) {
-            let position = colors.indexOf(card.getColor());
-            return {index: index, card: card, position: position};
-        });
+        let split_deck = [[], [], [], [], []];
 
-        // réorganisation du tableau de mapping en fonction de la couleur ('position')
-        mapped = mapped.sort(function (a, b) {
-            return a.position - b.position;
-        });
-
-        // réorganisation du tableau du mapping en fonction de la valeur
-        mapped = mapped.sort(function (a, b) {
-            // si la couleur change, on ne fait rien
-            if (a.card.getColor() === b.card.getColor()) {
-                return a.card.getValue() - b.card.getValue();
+        // trier par couleurs
+        for (let index in deck) {
+            if (deck.hasOwnProperty(index)) {
+                let card = deck[index];
+                split_deck[card.color].push(card);
             }
-        });
+        }
 
-        // application du mapping sur le tableau final
-        sorted = mapped.map(function (color) {
-            return deck[color.index];
-        });
+        // trier par valeur
+        for (let index in split_deck) {
+            if (split_deck.hasOwnProperty(index)) {
+                let colors = split_deck[index];
+                $.merge(sorted, (colors.sort(
+                    (a, b) => {
+                        return a.value - b.value
+                    }
+                )));
+            }
+        }
 
         return sorted;
     }
+
 }

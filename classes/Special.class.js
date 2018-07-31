@@ -27,4 +27,20 @@ class Specials extends Card{
                 break;
         }
     }
+
+    triggerAction(game) {
+        switch (this.bonus) {
+            case '+2':
+                game.cardsToGet += 2;
+                break;
+            case 'invert':
+                game.clockWise = !game.clockWise;
+                Display.showMessage("Changement de sens");
+                break;
+            case 'pass':
+                game.nextTurn();
+                Display.showMessage("Quelqu'un a passé son tour");
+                break;
+        }
+    }
 }

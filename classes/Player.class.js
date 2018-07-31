@@ -7,6 +7,10 @@ class Player{
         this.deck = [];
     }
 
+    getName() {
+        return this.name;
+    }
+
     getRandomName(){
         return name_samples[Math.floor(Math.random()*name_samples.length)]
     }

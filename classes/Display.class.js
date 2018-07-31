@@ -39,4 +39,12 @@ class Display {
             .addClass(card.getClass())
             .data('id', card.id)
     }
+
+    static updatePlayerName(player) {
+        $('#player_infos').text('au tour de ' + player.getName() + ' de jouer.');
+    }
+
+    static showMessage(message) {
+        $('#message').text(message).fadeIn();
+    }
 }
