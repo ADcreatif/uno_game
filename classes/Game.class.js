@@ -12,6 +12,7 @@ class Game {
         this.currentTurn = 0;
         this.clockWise = true;
         this.pendingCards = 0;
+        this.cardsToPickInPile = 3
     }
 
     get_nextPlayer() {
@@ -80,7 +81,6 @@ class Game {
         this.currentTurn++;
     }
 
-
     onClickCard(event) {
         // identifier l'id de la carte qui vient d'être jouée
         let clicked_card = $(event.currentTarget);
@@ -91,12 +91,18 @@ class Game {
         try {
             // si on clique sur la pioche
             if (clicked_card.data('pile') === true) {
-                player.addCard(this.cardManager.pickRandomCard());
 
-                // rafraichir le deck du joueur
-                Display.updatePlayerDeck(player.getDeck());
+                if (!this.cardManager.canPlayDeck(player.getDeck(), this.currentCard)) {
+                    if (this.cardsToPickInPile >= 0) {
+                        player.addCard(this.cardManager.pickRandomCard());
+                        player.setDeck(CardManager.sortCards(player.getDeck()));
 
-                //  si on clique sur la défausse, il ne se passe rien
+                        // rafraichir le deck du joueur
+                        Display.updatePlayerDeck(player.getDeck());
+                    } else {
+                        this.nextTurn();
+                    }
+                }
             } else if (clicked_card.parent('#discard').length > 0) {
                 return;
 
@@ -117,9 +123,9 @@ class Game {
                 this.currentCard = cardToPlay;
 
                 this.currentCard.triggerAction(this);
-
                 this.nextTurn();
             }
+
 
         } catch (e) {
             console.log(e);
