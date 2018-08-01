@@ -19,15 +19,33 @@ ul {
 }
 
 #player_deck .card:hover {
-    margin: -25px 25px;
+    z-index: 100;
+    margin-top: -10px;
+    transform: scale(1.1);
+}
+
+#player_deck .card:hover,
+.card.playable {
+    filter: grayscale(0%) blur(0);
+    opacity: 1;
+    margin-top: 0;
+}
+
+#player_deck .card.playable {
+    transform: rotate(-3deg);
+    border-color: white;
+}
+
+#player_deck .card {
+    border-color: #22bec0;
 }
 
 /**********************************************
                      CARDS
  ***********************************************/
 .card{
-    transition: margin 200ms;
-    margin: 5px -20px;
+    transition: all 200ms ease-out;
+    margin: 5px -15px;
     border-radius:5px;
     background: green;
     width: 100px;
@@ -177,4 +195,26 @@ i.fa, i.fas {
 
 .color_choice table td:hover {
     opacity: 1;
+}
+
+#players_infos {
+    position: fixed;
+    right: 20px;
+    background-color: #55d231;
+    border: 2px solid white;
+    padding: 10px 20px;
+}
+
+#players_infos ul {
+    margin: 0;
+    padding: 0
+}
+
+.current_player:before {
+    content: ">";
+    padding-right: 4px;
+}
+
+.current_player {
+    margin-left: -10px;
 }

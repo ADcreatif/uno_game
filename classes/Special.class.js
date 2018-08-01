@@ -31,7 +31,8 @@ class Specials extends Card{
     triggerAction(game) {
         switch (this.bonus) {
             case '+2':
-                game.cardsToGet += 2;
+                game.pendingCards += 2;
+                Display.showPendingCards(game.pendingCards);
                 break;
             case 'invert':
                 game.clockWise = !game.clockWise;

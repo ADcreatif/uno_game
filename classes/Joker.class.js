@@ -22,7 +22,7 @@ class Joker extends Card{
         modal('color_choice', content, 'Choisissez votre couleur', game.onClickChangeColor.bind(game));
 
         if (this.bonus === "+4 Super Joker") {
-            game.cardsToGet += 4;
+            game.pendingCards += 4;
         }
 
     }

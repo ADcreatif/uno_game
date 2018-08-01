@@ -93,11 +93,16 @@ class CardManager {
         Object.assign(this.pile, this.cards);
     }
 
+    /**
+     * retourne un booleen si le joueur peux jouer une carte de son deck, (ou pas...)
+     * @param deck {Array} player's cards instances
+     * @param targetCard {Card} current stacked card
+     * @returns {boolean} wether or not the player can play
+     */
     canPlayDeck(deck, targetCard) {
-        // on boucle sur toutes les cartes du deck du joueur
         for (let card_index in deck) {
+            // on boucle sur toutes les cartes du deck du joueur
             if (deck.hasOwnProperty(card_index)) {
-
                 // on vérifie s'il y a une carte jouable
                 if (this.canPlayCard(deck[card_index], targetCard)) {
                     // dans ce cas, mission accomplie, le joueur peut jouer
@@ -107,6 +112,28 @@ class CardManager {
         }
         // si à aucun moment on a trouvé une carte jouable, alors on return false
         return false;
+    }
+
+    /**
+     * retourne un tableau de cartes jouables sur targetCard
+     * @param deck {Array} player's cards instances
+     * @param targetCard {Card} current stacked card
+     * @returns {Array} cards list
+     */
+    findCardToPlay(deck, targetCard) {
+        let playableCards = [];
+
+        for (let card_index in deck) {
+            // on boucle sur toutes les cartes du deck du joueur
+            if (deck.hasOwnProperty(card_index)) {
+                // on vérifie s'il y a une carte jouable
+                if (this.canPlayCard(deck[card_index], targetCard)) {
+                    // dans ce cas, mission accomplie, le joueur peut jouer
+                    playableCards.push(deck[card_index]);
+                }
+            }
+        }
+        return playableCards;
     }
 
     /**

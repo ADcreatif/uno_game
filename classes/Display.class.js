@@ -38,6 +38,7 @@ class Display {
             .html(card.getTagContent() || card.getName())
             .addClass(card.getClass())
             .data('id', card.id)
+            .attr('id', card.id);
     }
 
     static updatePlayerName(player) {
@@ -45,6 +46,52 @@ class Display {
     }
 
     static showMessage(message) {
-        $('#message').text(message).fadeIn();
+        let $message = $('#message');
+
+        // afficher le message d'info
+        $message.text(message).fadeIn();
+
+        // masquer l'élément au bout de 5secondes
+        setTimeout(() => {
+            $message.fadeOut('slow');
+        }, 5000)
+    }
+
+    static showPendingCards(pendingCards) {
+        let infos = $('#infos');
+
+        // afficher le nombre de cartes en attente
+        if (pendingCards > 0) {
+            infos.text("il y a " + pendingCards + " cartes en attente.").fadeIn();
+        } else {
+            infos.fadeOut('slow');
+        }
+    }
+
+    static showPlayersInfos(players, currentPlayerId) {
+        let ul = $('<ul>');
+
+        $(players).each(function () {
+            if (this) {
+                let li = $('<li>');
+                let text = this.getName() + ' (' + this.getDeck().length + ')';
+                if (this.id === currentPlayerId) {
+                    li.addClass('current_player')
+                }
+                ul.append(li.text(text));
+            }
+        });
+        $('#players_infos').empty().append(ul);
+    }
+
+    static showPlayableCards(playableCards) {
+        $('.cards').removeClass('playable');
+
+        $.each(playableCards, (e, item) => {
+            $('#' + item.id).addClass('playable');
+        })
     }
 }
+
+
+

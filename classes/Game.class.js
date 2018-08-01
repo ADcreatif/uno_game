@@ -11,7 +11,7 @@ class Game {
         this.currentCard = null;
         this.currentTurn = 0;
         this.clockWise = true;
-        this.cardsToGet = 0;
+        this.pendingCards = 0;
     }
 
     get_nextPlayer() {
@@ -46,29 +46,36 @@ class Game {
         // vérification des victoires;
         let winner = this.get_winner();
         if (winner) {
-            console.log('nous avons un gagnant : ' + winner);
+            Display.showMessage('nous avons un gagnant : ' + winner.getName());
             return;
         }
 
         //----------------------------------------- DEBUT DU TOUR ----------------------------------
         let currentPlayer = this.get_nextPlayer();
 
+        // pour le premier tour on affiche la première carte de la pioche
         if (this.currentTurn === 0) {
             this.currentCard = this.cardManager.pickRandomCard();
         }
 
-        if (this.cardsToGet > 0 && !this.cardManager.canPlayDeck()) {
-            for (let quantity = 0; quantity < this.cardsToGet; quantity++) {
+        let canPlay = this.cardManager.canPlayDeck(currentPlayer.getDeck(), this.currentCard);
+        let cardsToPlay = this.cardManager.findCardToPlay(currentPlayer.getDeck(), this.currentCard);
+
+        // si il y a des +2 a récupérer et que le joueur ne peut pas jouer
+        if (this.pendingCards > 0 && !canPlay) {
+            for (let quantity = 0; quantity < this.pendingCards; quantity++) {
                 currentPlayer.addCard(this.cardManager.pickRandomCard());
             }
-            Display.showMessage('Vous venez de prendre +' + this.cardsToGet + ' dans la tronche ! Quelle joie !');
-            this.cardsToGet = 0;
+            Display.showMessage('Vous venez de prendre +' + this.pendingCards + ' dans la tronche ! Quelle joie !');
+            this.pendingCards = 0;
         }
 
         //----------------------------------------- FIN DU TOUR ----------------------------------
         Display.updateCurrentCard(this.currentCard);
         Display.updatePlayerName(currentPlayer);
         Display.updatePlayerDeck(currentPlayer.getDeck());
+        Display.showPlayableCards(cardsToPlay);
+        Display.showPlayersInfos(this.players, this.currentPlayer);
 
         this.currentTurn++;
     }
@@ -170,5 +177,4 @@ class Game {
         // démarrage du jeu
         this.nextTurn();
     }
-
 }
